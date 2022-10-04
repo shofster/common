@@ -1,6 +1,6 @@
-module github.com/shofster/scsi
+module github.com/shofster/common
 
-go 1.17
+go 1.16
 
 require (
 	fyne.io/fyne/v2 v2.2.3
