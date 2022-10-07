@@ -207,6 +207,7 @@ func TestJpeg(t *testing.T) {
 		filename string
 		w        wrapper
 	}{
+		//{"OK", "./data/1937Directory.jpg", wrapper{tags: Tags{ImageForm: jpgForm}, err: nil}},
 		{"OK", "./data/gus2.jpg", wrapper{tags: Tags{ImageForm: jpgForm}, err: nil}},
 		{"scanner", "./data/canon-scanner.JPG", wrapper{tags: Tags{ImageForm: jpgForm}, err: nil}},
 		{"scanner", "./data/doxieFlip-scanner.JPG", wrapper{tags: Tags{ImageForm: jpgForm}, err: nil}},
