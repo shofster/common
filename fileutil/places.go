@@ -54,11 +54,11 @@ func PrettyDiskSize(s uint64) string {
 	}
 	B /= 1024
 	if s > B {
-		return fmt.Sprintf("%4.1fMB", s/1024./B)
+		return fmt.Sprintf("%4.1fMB", float32(s/1024./B))
 	}
 	B /= 1024
 	if s > B {
-		return fmt.Sprintf("%4.1fKB", s/1024./1024./B)
+		return fmt.Sprintf("%4.1fKB", float32(s/1024./1024./B))
 	}
 	return fmt.Sprintf("%db", s)
 }
