@@ -29,7 +29,7 @@ import (
 
 var DefaultDoubleClickTime = time.Millisecond * 500
 var DefaultMonospace = false
-var DefaultIconType = CheckBoxType
+var DefaultIconType = FileIconType
 
 //goland:noinspection GoUnusedGlobalVariable,SpellCheckingInspection
 var RFCtypes = []string{"Default", "UNIX", "RFC822", "RFC822Z", "RFC1123", "RFC1123Z", "RFC3339"}
@@ -69,12 +69,13 @@ func NewFileList(path string, sel FileSelectFilter, action FileSelectAction,
 		// update
 		func(id widget.ListItemID, item fyne.CanvasObject) {
 			file := dir.File(id)
-			//log.Println("UPDATE ON ", file.String())
+			// log.Println("     UPDATE ON ", file.String())
 			info, err := file.Info()
 			item.(*fyne.Container).Objects[1].(*widget.Label).Text = pretty(file.DisplayName(), info, err)
 			switch DefaultIconType {
 			case FileIconType:
 				if file.IsSelected() {
+					// log.Println("     SELECTED ON ", file.String())
 					item.(*fyne.Container).Objects[0].(*widget.Icon).SetResource(theme.ConfirmIcon())
 				} else {
 					if file.IsDir() {
@@ -91,7 +92,7 @@ func NewFileList(path string, sel FileSelectFilter, action FileSelectAction,
 		})
 	fileList.OnSelected = func(id widget.ListItemID) {
 		file := dir.File(id) // current file POINTER
-		//log.Printf("Selected %d %s, IsDir %t, IsSelected %t, FileType %d, Multiple %t, lastId %d",
+		//fmt.Printf("Selected %d %s, IsDir %t, IsSelected %t, FileType %d, Multiple %t, lastId %d\n",
 		//	id, file.DisplayName(), file.IsDir(), file.IsSelected(), sel.FileType, sel.Multiple,
 		//	lastSelected)
 		duration := time.Now().Sub(lastTime)
