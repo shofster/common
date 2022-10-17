@@ -36,6 +36,13 @@ func Notify(app fyne.App, title, content string) {
 func VerifyDelete(appWindow fyne.Window, content string, res func(bool)) {
 	dialog.ShowConfirm("Is it OK to completely remove?", content, res, appWindow)
 }
+
+// SetFocus on any Focusable - normally a Widget.
+//goland:noinspection GoUnusedExportedFunction
+func SetFocus(canvas fyne.Canvas, obj fyne.Focusable) {
+	canvas.Focus(obj)
+}
+
 func urlFromString(str string) (*url.URL, error) {
 	u, err := url.Parse(str)
 	if err != nil {

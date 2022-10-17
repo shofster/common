@@ -27,7 +27,11 @@ func main() {
 	buttDir := widget.NewButton("select dir", func() {
 		testDirOpen()
 	})
-	c := container.NewVBox(buttDir)
+	fileDir := widget.NewButton("select file", func() {
+		testFileOpen()
+	})
+	fileutil.DefaultIconType = fileutil.FileIconType
+	c := container.NewVBox(buttDir, fileDir)
 	appWindow.SetContent(c)
 	appWindow.Resize(fyne.NewSize(800, 600))
 	appWindow.ShowAndRun()
@@ -43,11 +47,28 @@ func testDirOpen() {
 		FileSelect: fileutil.Open,
 		Multiple:   false,
 		Hidden:     ""}
-	_ = path.Set("Z:/")
-	go fileutil.FileSelect(placeSel, path, appWindow, func(dirs []string) {
-		log.Printf("%d selected\n")
+	last := "E:\\charon\\z"
+	_ = path.Set(last)
+	fileutil.FileSelect(placeSel, path, appWindow, func(dirs []string) {
+		log.Printf("%d selected\n", len(dirs))
 		if len(dirs) > 0 {
 			fmt.Println("dir", dirs[0])
+		}
+	})
+}
+func testFileOpen() {
+	placeSel := fileutil.FileSelectFilter{
+		Title:      "Select a File",
+		FileType:   fileutil.File,
+		FileSelect: fileutil.Open,
+		Multiple:   false,
+		Hidden:     ""}
+	last := "E:\\charon\\z"
+	_ = path.Set(last)
+	fileutil.FileSelect(placeSel, path, appWindow, func(files []string) {
+		log.Printf("%d selected\n", len(files))
+		if len(files) > 0 {
+			fmt.Println("dir", files[0])
 		}
 	})
 }
