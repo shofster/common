@@ -30,8 +30,8 @@ func TestStack(t *testing.T) {
 	if !b || item != "item 3" {
 		t.Errorf("pop; item 3 got = %s", item)
 	}
-	e := s.Empty()
-	if !e {
+	n := s.Count()
+	if n != 0 {
 		t.Error("Stack wasn't empty")
 	}
 	item, b = s.Pop()

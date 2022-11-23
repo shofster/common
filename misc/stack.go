@@ -26,8 +26,8 @@ func NewStack[T any]() *Stack[T] {
 }
 
 //goland:noinspection GoUnusedExportedFunction
-func (s *Stack[T]) Empty() bool {
-	return len(s.items) == 0
+func (s *Stack[T]) Count() int {
+	return len(s.items)
 }
 
 //goland:noinspection GoUnusedExportedFunction
